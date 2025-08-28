@@ -3,6 +3,11 @@ import API from "../../config/axios";
 // Create Razorpay Order
 export const createOrder = async (eventId, data) => {
   try {
+    const token = localStorage.getItem("accessToken");
+    if(!token){
+      console.log("User not logged in");
+      return
+    }    
     const res = await API.post(`/api/v1/bookings/create-order/${eventId}`, data);
     return res.data;
   } catch (error) {
@@ -13,6 +18,11 @@ export const createOrder = async (eventId, data) => {
 // Verify Payment and Create Booking
 export const verifyPayment = async (data) => {
   try {
+    const token = localStorage.getItem("accessToken");
+    if(!token){
+      console.log("User not logged in");
+      return
+    }
     const res = await API.post(`/api/v1/bookings/verify-payment`, data);
     return res.data;
   } catch (error) {
@@ -23,6 +33,11 @@ export const verifyPayment = async (data) => {
 // Get Logged-in User’s Bookings
 export const getMyBookings = async () => {
   try {
+    const token = localStorage.getItem("accessToken");
+    if(!token){
+      console.log("User not logged in");
+      return
+    }
     const res = await API.get(`/api/v1/bookings/my-bookings`);
     return res.data;
   } catch (error) {
@@ -33,7 +48,12 @@ export const getMyBookings = async () => {
 // Cancel a Booking
 export const cancelBooking = async (bookingId) => {
   try {
-    const res = await API.patch(`/api/v1/bookings/cancel-booking/${bookingId}`);
+    const token = localStorage.getItem("accessToken");
+    if(!token){
+      console.log("User not logged in");
+      return
+    }
+    const res = await API.delete(`/api/v1/bookings/cancel-booking/${bookingId}`);
     return res.data;
   } catch (error) {
     throw error.response?.data || error.message;

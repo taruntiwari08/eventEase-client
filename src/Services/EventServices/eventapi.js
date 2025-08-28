@@ -20,6 +20,11 @@ export const getEventById = async (eventId) => {
 
 export const createEvent = async (formData) => {
   try {
+    const token = localStorage.getItem("accessToken");
+    if(!token){
+      console.log("User not logged in");
+      return
+    }
     const response = await API.post("/api/v1/events/create-event", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
@@ -32,6 +37,11 @@ export const createEvent = async (formData) => {
 // Update event (with optional image upload)
 export const updateEvent = async (eventId, formData) => {
   try {
+    const token = localStorage.getItem("accessToken");
+    if(!token){
+      console.log("User not logged in");
+      return
+    }    
     const response = await API.put(`/api/v1/events/update-event/${eventId}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
@@ -43,6 +53,11 @@ export const updateEvent = async (eventId, formData) => {
 
 export const deleteEvent = async (eventId) => {
   try {
+    const token = localStorage.getItem("accessToken");
+    if(!token){
+      console.log("User not logged in");
+      return
+    }    
     const response = await API.delete(`/api/v1/events/delete-event/${eventId}`);
     return response.data;
   } catch (error) {
@@ -52,6 +67,11 @@ export const deleteEvent = async (eventId) => {
 
 export const getEventAnalytics = async (eventId) => {
   try {
+    const token = localStorage.getItem("accessToken");
+    if(!token){
+      console.log("User not logged in");
+      return
+    }
     const response = await API.get(`/api/v1/events/analytics/${eventId}`);
     return response.data;
   } catch (error) {

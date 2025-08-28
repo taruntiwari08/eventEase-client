@@ -1,41 +1,53 @@
 import axios from "axios";
 import { baseURL } from "./baseURL.js";
+import store from "../store/store.js";
+import { logout, setCredentials } from "../store/authslice.js";
 
 const API = axios.create({
-    baseURL: baseURL
-})
+  baseURL: baseURL,
+});
 
-// Add token to request headers
-API.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// Attach token to requests
+API.interceptors.request.use((config) => {
+  const token = store.getState().auth.accessToken;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
+// Handle responses & refresh tokens
 API.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // If token expired & not retried already
+    if (error.response?.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true;
+
       try {
-        const refreshToken = localStorage.getItem("refreshToken");
-        const res = await axios.post(`${baseURL}/api/v1/users/refresh//refresh-token`, { refreshToken });
+        const { refreshToken } = store.getState().auth;
 
-        localStorage.setItem("accessToken", res.data.accessToken);
-        API.defaults.headers.common["Authorization"] = `Bearer ${res.data.accessToken}`;
+        // Get new access token
+        const res = await axios.post(`${baseURL}/api/v1/users/refresh-token`, {
+          refreshToken,
+        });
 
-        return API(originalRequest); // retry request with new token
+        const newAccessToken = res.data.accessToken;
+        const newRefreshToken = res.data.refreshToken;
+
+        // Update Redux store
+        store.dispatch(
+          setCredentials({ accessToken: newAccessToken, refreshToken: newRefreshToken })
+        );
+
+        // Retry original request with new token
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        return API(originalRequest);
       } catch (err) {
-        console.error("Refresh token expired. Redirecting to login...");
-        localStorage.clear();
-        window.location.href = "/login";
+        store.dispatch(logout());
+        return Promise.reject(err);
       }
     }
     return Promise.reject(error);
@@ -43,4 +55,3 @@ API.interceptors.response.use(
 );
 
 export default API;
-
