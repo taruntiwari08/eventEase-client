@@ -42,7 +42,7 @@ export const updateEvent = async (eventId, formData) => {
       console.log("User not logged in");
       return
     }    
-    const response = await API.put(`/api/v1/events/update-event/${eventId}`, formData, {
+    const response = await API.patch(`/api/v1/events/update-event/${eventId}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     return response.data;
@@ -73,6 +73,20 @@ export const getEventAnalytics = async (eventId) => {
       return
     }
     const response = await API.get(`/api/v1/events/analytics/${eventId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : error;
+  }
+}
+
+export const getMyEvents = async () => {
+  try {
+    const token = localStorage.getItem("accessToken");
+    if(!token){
+      console.log("User not logged in");
+      return
+    }
+    const response = await API.get(`/api/v1/events/my-events`);
     return response.data;
   } catch (error) {
     throw error.response ? error.response.data : error;

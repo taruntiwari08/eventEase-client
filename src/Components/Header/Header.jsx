@@ -3,11 +3,33 @@ import { LogoutBtn } from "./LogoutBtn";
 import { useSelector } from "react-redux";
 import { Wallet } from "lucide-react";
 import { IconUser } from "@tabler/icons-react";
+import { useState } from "react";
 
-export default function Header() {
+export default function Header({ events, setFilteredEvents, setSearchQuery }) {
   const { accessToken, user } = useSelector((state) => state.auth);
   const isLoggedIn = Boolean(accessToken);
   const isAuthorised = user?.role === "admin" || user?.role === "organizer";
+  const [search, setSearch] = useState("");
+  
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearch(value);
+    setSearchQuery(value); // 🔹 update parent searchQuery
+
+    if (value.trim() === "") {
+      setFilteredEvents([]); // no events when empty
+      return;
+    }
+
+
+    // filter events based on title, description, etc.
+    const filtered = events.filter(event =>
+      event.title.toLowerCase().includes(value) ||
+      event.description.toLowerCase().includes(value)
+    );
+    setFilteredEvents(filtered);
+  };
 
   return (
     <header className="w-full bg-gradient-to-r from-black via-blue-800 to-black shadow-lg">
@@ -19,11 +41,13 @@ export default function Header() {
 
 
         {/* Center Section: Search Bar */}
-        <div className="flex-grow md:ml-56 mt-4 md:mt-0">
+        <div className="flex-grow md:ml-56  mt-4 md:mt-0">
           <input
             type="text"
             placeholder="Search events..."
-            className="w-full md:w-126 border-2 px-4 py-2 rounded-full focus:outline-none shadow text-black"
+            className="w-full md:w-126 border-2 px-4 py-2 rounded-full focus:outline-none shadow text-slate-400"
+            value={search}
+            onChange={handleSearch}
           />
         </div>
 

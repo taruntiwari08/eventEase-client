@@ -35,6 +35,7 @@ function Profile() {
         setBookings(myBookings?.data || []);
         setEditName(profile?.name);
         setEditEmail(profile?.email);
+        
       } catch (error) {
         toast.error(error.message || "Failed to load profile");
       } finally {
@@ -166,21 +167,18 @@ function Profile() {
               <p className="text-gray-400">🏷️ ₹{booking.amountPaid}</p>
 
               <div className="flex justify-end mt-3">
-            {booking.paymentstatus === "cancelled" ? (
-            <button
-              disabled
-              className="bg-red-400 text-white py-2 px-4 rounded-md cursor-not-allowed  transition duration-300"
-            >
-              Cancelled
-            </button>
-          ) : (
-            <button
-              onClick={()=>handleCancleBooking(booking._id)}
-              className="bg-red-600 text-white py-2 px-4 cursor-pointer rounded-md "
-            >
-              Cancel Booking
-            </button>
-          )}
+<button
+  onClick={() => handleCancleBooking(booking._id)}
+  disabled={!(new Date(booking.event?.date) > new Date()) || booking.paymentstatus === "cancelled"}
+  className={`${
+    !(new Date(booking.event?.date) > new Date()) || booking.paymentstatus === "cancelled"
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-red-600 hover:bg-red-700"
+  } text-white py-2 px-4 rounded-md transition duration-300`}
+>
+  {booking.paymentstatus === "cancelled" ? "Cancelled" : "Cancel Booking"}
+</button>
+
               </div>
             </div>
           ))}
