@@ -148,40 +148,47 @@ function Profile() {
         <p className="text-gray-500">No bookings found.</p>
       ) : (
         <div className="grid md:grid-cols-2 gap-4">
-          {bookings.map((booking) => (
-            <div
-              key={booking._id}
-              className="bg-black/50 shadow rounded-lg p-4 border hover:shadow-md transition"
-            >
-              <h4 className="font-bold text-lg">
-                {booking.event?.title || "Event"}
-              </h4>
-              <p className="text-gray-400">
-                📍 {booking.event?.location || "Unknown"}
-              </p>
-              <p className="text-gray-400">
-                📅 {new Date(booking.event?.date).toLocaleDateString()}
-              </p>
-              <p className="text-gray-400">⏰ {new Date(booking.event?.date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).toUpperCase()}</p>
-              <p className="text-gray-400">👥 {booking.seatsBooked} Seats</p>
-              <p className="text-gray-400">🏷️ ₹{booking.amountPaid}</p>
+  {bookings.map((booking) => {
+  if (!booking.event) return null; // skip deleted events
 
-              <div className="flex justify-end mt-3">
-<button
-  onClick={() => handleCancleBooking(booking._id)}
-  disabled={!(new Date(booking.event?.date) > new Date()) || booking.paymentstatus === "cancelled"}
-  className={`${
-    !(new Date(booking.event?.date) > new Date()) || booking.paymentstatus === "cancelled"
-      ? "bg-gray-400 cursor-not-allowed"
-      : "bg-red-600 hover:bg-red-700"
-  } text-white py-2 px-4 rounded-md transition duration-300`}
->
-  {booking.paymentstatus === "cancelled" ? "Cancelled" : "Cancel Booking"}
-</button>
+  return (
+    <div
+      key={booking._id}
+      className="bg-black/50 shadow rounded-lg p-4 border hover:shadow-md transition"
+    >
+      <h4 className="font-bold text-lg">
+        {booking.event?.title}
+      </h4>
+      <p className="text-gray-400">
+        📍 {booking.event?.location}
+      </p>
+      <p className="text-gray-400">
+        📅 {new Date(booking.event?.date).toLocaleDateString()}
+      </p>
+      <p className="text-gray-400">
+        ⏰ {new Date(booking.event?.date).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }).toUpperCase()}
+      </p>
+      <p className="text-gray-400">🆔 {booking._id}</p>
+      <p className="text-gray-400">👥 {booking.seatsBooked} Seats</p>
+      <p className="text-gray-400">🏷️ ₹{booking.amountPaid}</p>
 
-              </div>
-            </div>
-          ))}
+      <div className="flex justify-end mt-3">
+        <button
+          onClick={() => handleCancleBooking(booking._id)}
+          disabled={!(new Date(booking.event?.date) > new Date()) || booking.paymentstatus === "cancelled"}
+          className={`${
+            !(new Date(booking.event?.date) > new Date()) || booking.paymentstatus === "cancelled"
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-red-600 hover:bg-red-700"
+          } text-white py-2 px-4 rounded-md transition duration-300`}
+        >
+          {booking.paymentstatus === "cancelled" ? "Cancelled" : "Cancel Booking"}
+        </button>
+      </div>
+    </div>
+  );
+})}
+
         </div>
       )}
 

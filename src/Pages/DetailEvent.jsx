@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReviewCard from "../Components/Cards/ReviewCard";
 import ReviewForm from "../Components/Cards/PostReview";
+import ChatBox from "../Components/Chatbox/Chatbox";
 
 
 function DetailEvent() {
@@ -249,6 +250,11 @@ return (
         </div>
       </div>
     )}
+    {/* Chat Box */}
+    <div className="fixed bg-amber-200 bottom-4 right-4 z-50">
+      <ChatBox eventId={id} />
+    </div>
+    
   </div>
 );
 }
