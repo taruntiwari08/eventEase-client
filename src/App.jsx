@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { getUserProfile } from "./Services/authServices/authapi";
+import { getUserProfile } from "./Services/AuthServices/authapi";
 import { logout, setCredentials } from "./store/authslice";
-import { getAllEvents } from "./Services/EventServices/eventapi";
 import EventList from "./Components/Header/SearchEvents";
 
 function App() {
