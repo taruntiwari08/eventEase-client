@@ -19,14 +19,6 @@ const UpdateEventModal = ({ event, open, onClose, onUpdate }) => {
     onClose();
     
   };
-// Utility to format date for datetime-local input
-// const formatDateForInput = (isoDate) => {
-//   if (!isoDate) return "";
-//   const date = new Date(isoDate);
-//   const tzOffset = date.getTimezoneOffset() * 60000; // offset in ms
-//   const localISOTime = new Date(date - tzOffset).toISOString().slice(0, 16); 
-//   return localISOTime; // "yyyy-MM-ddTHH:mm"
-// };
 
 
   if (!open) return null;

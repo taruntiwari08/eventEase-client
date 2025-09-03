@@ -51,14 +51,14 @@ export const updateEvent = async (eventId, formData) => {
   }
 };
 
-export const deleteEvent = async (eventId) => {
+export const cancelEvent = async (eventId) => {
   try {
     const token = localStorage.getItem("accessToken");
     if(!token){
       console.log("User not logged in");
       return
     }    
-    const response = await API.delete(`/api/v1/events/delete-event/${eventId}`);
+    const response = await API.patch(`/api/v1/events/cancel-event/${eventId}`);
     return response.data;
   } catch (error) {
     throw error.response ? error.response.data : error;
@@ -96,6 +96,15 @@ export const getMyEvents = async () => {
 export const deleteEventbyAdmin = async (eventId) => {
   try {
     const response = await API.delete(`/api/v1/events/admin/delete-event/${eventId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : error;
+  }
+}
+
+export const getAllEventsByAdmin = async () => {
+  try {
+    const response = await API.get(`/api/v1/events/admin/all-events`);
     return response.data;
   } catch (error) {
     throw error.response ? error.response.data : error;

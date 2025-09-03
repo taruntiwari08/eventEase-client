@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { registerUser } from "../../Services/authServices/authapi";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const {
@@ -12,11 +14,11 @@ const Register = () => {
     reset,
   } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
     //   console.log("Registering:", data);
       const response = await registerUser(data);
-      const navigate = useNavigate();
           dispatch(
               setCredentials({
                   user : response.data.user,
@@ -29,29 +31,30 @@ const Register = () => {
      localStorage.setItem("userId", response.data.user._id);
       console.log("Register Response:", response);
       reset();
-      alert("Registration Successful");
+      toast.success("Registration successful!");
       navigate("/");
     } catch (error) {
       console.error("Register Error:", error);
-      alert(error.message || "Something went wrong!");
+      toast.error(error.message || "Registration failed!");
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
-      <div className="w-full max-w-md bg-white/90 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border bg-gradient-to-br from-blue-500 via-slate-200 to-blue-500 border-gray-200">
-        <h2 className="text-2xl font-bold text-center text-indigo-600 mb-6">
-          Create Your Account ✨
+      <ToastContainer autoClose={3000} position="top-right"/>
+      <div className="w-full max-w-md bg-transparent backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-gray-200 ">
+        <h2 className="text-2xl font-bold text-center text-slate-300 mb-6">
+          Create Your Account 
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Full Name</label>
+            <label className="block text-sm font-medium text-gray-400">Full Name</label>
             <input
               type="text"
               {...register("name", { required: "Name is required" })}
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 w-full text-slate-200 px-4 py-2 border  rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="Enter your full name"
             />
             {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
@@ -59,11 +62,14 @@ const Register = () => {
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email Address</label>
+            <label className="block text-sm font-medium text-gray-400">Email Address</label>
             <input
               type="email"
-              {...register("email", { required: "Email is required" })}
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+              {...register("email", { 
+                required: "Email is required",
+                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+               })}
+              className="mt-1 w-full px-4 py-2 border text-slate-200  rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="Enter your email"
             />
             {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
@@ -71,11 +77,11 @@ const Register = () => {
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Create Password</label>
+            <label className="block  text-sm font-medium text-gray-400">Create Password</label>
             <input
               type="password"
               {...register("password", { required: "Password is required" })}
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 w-full px-4 py-2 border text-slate-200  rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="Enter your password"
             />
             {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
@@ -83,16 +89,16 @@ const Register = () => {
 
           {/* Role (Fancy Wording) */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-400">
               Choose Your Identity 🌟
             </label>
             <select
               {...register("role", { required: "Please select your identity" })}
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 w-full px-4 py-2 text-slate-200 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
             >
-              <option value="">-- Select Your Role --</option>
-              <option value="attendee">🎟️ Event Explorer</option>
-              <option value="organizer">📢 Event Organizer</option>
+              <option value="" style={{backgroundColor: "black"}}>-- Select Your Role --</option>
+              <option  value="attendee" style={{backgroundColor: "black"}}>🎟️ Event Explorer</option>
+              <option value="organizer" style={{backgroundColor: "black"}}>📢 Event Organizer</option>
             </select>
             {errors.role && <p className="text-sm text-red-500">{errors.role.message}</p>}
           </div>
@@ -106,10 +112,10 @@ const Register = () => {
             {isSubmitting ? "Registering..." : "Register "}
           </button>
                     {/* Extra Links */}
-        <p className="text-center text-sm text-gray-500 mt-4">
+        <p className="text-center text-sm text-gray-400 mt-4">
           Already have an account?{" "}
           <Link to="/login">
-          <span className="text-indigo-600 font-semibold hover:underline cursor-pointer">
+          <span className="text-indigo-100 font-semibold hover:underline cursor-pointer">
             Log in
           </span>
           </Link>

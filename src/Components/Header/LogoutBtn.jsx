@@ -4,14 +4,16 @@ import { useNavigate } from 'react-router-dom'
 
 import { logout } from '../../store/authslice'
 import { logoutUser } from '../../Services/authServices/authapi'
+import { LogOut } from 'lucide-react'
 
-export function LogoutBtn() {
+export function LogoutBtn({onClick}) {
     const dispatch = useDispatch()
      const navigate = useNavigate()
     const logoutHandler = async ()=> {
         try {
             await logoutUser();
             dispatch(logout());
+            if(onClick) onClick();
         } catch (error) {
             console.error("Logout Error:", error);
             alert(error.message || "Something went wrong!");
@@ -27,5 +29,7 @@ export function LogoutBtn() {
 
     }    
 
-    return <button onClick={logoutHandler} className='inline-bock px-4 py-2 bg-yellow-300 text-black rounded-full font-semibold shadow hover:bg-white hover:text-purple-700 transition'>Logout</button>
+    return <button onClick={logoutHandler} className='inline-bock px-4 py-2 bg-yellow-300 text-black rounded-full font-semibold shadow hover:bg-white hover:text-purple-700 transition'>
+        <LogOut className='inline-block mr-2'/>
+        Logout</button>
 }

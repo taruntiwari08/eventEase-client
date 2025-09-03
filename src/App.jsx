@@ -12,9 +12,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.auth.accessToken);
-  const [events, setEvents] = useState([]); 
-  const [filteredEvents, setFilteredEvents] = useState(events);
-  const [searchQuery, setSearchQuery] = useState("");
 
 
   useEffect(() => {
@@ -46,24 +43,12 @@ function App() {
       .finally(() => setLoading(false));
   }, [accessToken, dispatch]);
 
-     useEffect(()=>{
-         const fetchEvents = async() =>{
-             try{
-                 const response = await getAllEvents();
-                 setEvents(response.data || []);
-             }catch(error){
-                 console.log(error);
-             }
-         };
-         fetchEvents();
- 
-     },[])
 
   return !loading ? (
-    <div className="min-h-screen flex flex-wrap content-between bg-white">
+    <div className="min-h-screen flex flex-wrap content-between bg-gradieent-to r from-black via-blue-800 to-black">
       <div className="w-full">
-        <Header events={events} setFilteredEvents={setFilteredEvents} setSearchQuery={setSearchQuery} />
-        <EventList events={filteredEvents} searchQuery={searchQuery} />
+        <Header/>
+        <EventList />
         <main>
           <Outlet />
         </main>

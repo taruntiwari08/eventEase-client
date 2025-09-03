@@ -159,6 +159,9 @@ function Profile() {
       <h4 className="font-bold text-lg">
         {booking.event?.title}
       </h4>
+      <p className="text-gray-400">🆔 {booking._id}</p>
+      <p className="text-gray-400">👥 {booking.seatsBooked} Seats</p>
+      <p className="text-gray-400">🏷️ ₹{booking.amountPaid}</p>
       <p className="text-gray-400">
         📍 {booking.event?.location}
       </p>
@@ -168,9 +171,6 @@ function Profile() {
       <p className="text-gray-400">
         ⏰ {new Date(booking.event?.date).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }).toUpperCase()}
       </p>
-      <p className="text-gray-400">🆔 {booking._id}</p>
-      <p className="text-gray-400">👥 {booking.seatsBooked} Seats</p>
-      <p className="text-gray-400">🏷️ ₹{booking.amountPaid}</p>
 
       <div className="flex justify-end mt-3">
         <button

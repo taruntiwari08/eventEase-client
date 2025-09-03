@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { postReview, updateReview } from "../../Services/ReviewServices/reviewapi";
+import { toast, ToastContainer } from "react-toastify";
 
 const ReviewForm = ({ eventId, onSuccess, initialData = null }) => {
   const [rating, setRating] = useState(initialData?.rating || 0);
@@ -22,7 +23,6 @@ const ReviewForm = ({ eventId, onSuccess, initialData = null }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    window.location.reload();
 
     try {
       let res;
@@ -38,17 +38,23 @@ const ReviewForm = ({ eventId, onSuccess, initialData = null }) => {
       }
 
       if (onSuccess) onSuccess(res);
+
+      toast.success(`Review ${initialData ? "updated" : "posted"} successfully`);
+      window.location.reload();
     } catch (err) {
       setError(err?.message || "Something went wrong");
+      toast.error(err?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
   return (
+    <>
+    <ToastContainer autoClose={3000} position="top-center"  />
     <form
       onSubmit={handleSubmit}
-      className="p-4 bg-transparent text-slate-200 rounded-2xl w-full shadow-md space-y-4"
+      className=" bg-transparent text-slate-200 rounded-2xl w-full shadow-md space-y-4"
     >
       <h2 className="text-lg font-semibold">
         {initialData ? "Edit Review" : "Post a Review"}
@@ -100,6 +106,7 @@ const ReviewForm = ({ eventId, onSuccess, initialData = null }) => {
           : "Submit Review"}
       </button>
     </form>
+    </>
   );
 };
 

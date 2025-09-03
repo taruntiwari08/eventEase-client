@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getEventById } from "../Services/EventServices/eventapi";
+import { deleteEventbyAdmin, getEventById } from "../Services/EventServices/eventapi";
 import { Calendar, Clock, MapIcon, User2Icon } from "lucide-react";
 import { createOrder, verifyPayment } from "../Services/BookingServices/bookingapi";
 import { useSelector } from "react-redux";
@@ -73,7 +73,7 @@ try {
           toast.success("Payment Successful and Booking Confirmed!", {
           onClose: () => {
             // refresh page after toast closes
-            window.location.reload();
+            navigate("/profile")
       },
     });
           
@@ -100,17 +100,27 @@ try {
 }
   }
 
+  const handleDelete = async()=>{
+    try {
+       await deleteEventbyAdmin(id);
+        navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message || "Failed to delete event");
+    }
+  }
+
   if (loading) {
-    return <div className="flex justify-center items-center h-screen ">Loading...</div>;
+    return <div className="flex justify-center items-center h-screen bg-gradient-to-r from-black via-blue-800 to-black ">Loading...</div>;
   }
 
   if (error) {
-    return <div className="text-red-500 text-center mt-10">{error}</div>;
+    return <div className="text-red-500 text-center mt-10  bg-gradient-to-r from-black via-blue-800 to-black">{error}</div>;
   }
 
 return (
   <div className="bg-gradient-to-r from-black via-blue-800 to-black min-h-screen p-8">
-    <ToastContainer position="top-right" autoClose={5000} />
+    <ToastContainer position="top-right" autoClose={4000} />
 
     <div className="max-w-6xl mx-auto space-y-10">
       {/* Event Card */}
@@ -120,7 +130,7 @@ return (
           <img
             src={event?.image || "https://via.placeholder.com/800x400"}
             alt={event?.title}
-            className="w-1/2 h-full object-cover rounded-2xl border-2 border-slate-200 p-2"
+            className=" h-full object-cover rounded-2xl border-2 border-slate-200 p-2"
           />
         </div>
 
@@ -161,7 +171,7 @@ return (
         <span className="text-xl font-semibold mb-2 text-slate-200">
           About the Event
         </span>
-        <p className="text-slate-700 leading-relaxed mb-6">
+        <p className="text-slate-500 leading-relaxed mb-6">
           {event?.description}
         </p>
 
@@ -170,6 +180,17 @@ return (
           <span className="text-2xl font-semibold text-blue-500">
             ₹{event?.Price}
           </span>
+          {
+            user?.role==="admin" && event?.activeStatus ==="cancelled" && (
+                             <button
+              onClick={handleDelete}
+              className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
+            >
+              Delete Event
+            </button>
+            )}
+
+          
           {BookingAvailable ? (
             <button
               onClick={() => setOpen(true)}
@@ -190,12 +211,15 @@ return (
 
       {/* Reviews Section */}
       {(event.status === "completed" || event.status === "ongoing" || event.status === "past") && (
-        <div className="p-6 max-w-full shadow-lg rounded-2xl">
-          <h2 className="text-2xl font-bold text-yellow-300 mb-4">
+        <div className="lg:p-6  max-w-full shadow-lg rounded-2xl">
+          <h2 className="text-2xl  font-bold text-yellow-300 mb-4">
             Reviews
           </h2>
-          <ReviewForm eventId={id} onSuccess={() => {}} />
-          <div className="mt-6 overflow-y-auto space-y-3">
+        { user != null &&
+            <ReviewForm eventId={id} onSuccess={() => {}} />
+        }
+        
+          <div className="mt-6 overflow-y-auto space-y-3 pt-2">
             <ReviewCard eventId={id} />
           </div>
         </div>

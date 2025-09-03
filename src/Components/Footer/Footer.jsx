@@ -20,9 +20,9 @@ export default function Footer() {
           <h3 className="text-lg font-semibold mb-3 text-yellow-300">Quick Links</h3>
           <nav className="flex flex-col space-y-2">
             <Link to="/" className="hover:text-yellow-300 transition">Home</Link>
-            <Link to="/" className="hover:text-yellow-300 transition">Events</Link>
-            <Link to="/" className="hover:text-yellow-300 transition">About</Link>
-            <Link to="/" className="hover:text-yellow-300 transition">Contact</Link>
+            <Link to="/events" className="hover:text-yellow-300 transition">Events</Link>
+            <Link to="/about" className="hover:text-yellow-300 transition">About</Link>
+            <Link to="/contact" className="hover:text-yellow-300 transition">Contact</Link>
           </nav>
         </div>
 

@@ -50,9 +50,9 @@ function ReviewCard({ eventId }) {
   if (!reviewsData) return null;
 
   return (
-    <div className="m-6 bg-transparent text-slate-200 shadow-xl rounded-2xl p-4 w-[28rem] z-50 border">
+    <div className=" bg-transparent text-slate-200 shadow-xl rounded-2xl p-4 lg:w-[28rem] z-50 border">
       {/* Header */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex  items-center justify-between mb-3">
         <h2 className="text-lg font-semibold">Reviews</h2>
         <div className="flex items-center space-x-1">
           {[...Array(5)].map((_, idx) => (
