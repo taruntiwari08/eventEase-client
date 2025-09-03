@@ -8,6 +8,14 @@ export default defineConfig({
     react(),
     tailwindcss()
   ], 
+    resolve: {
+    alias: {}
+  },
+   server: {
+    fs: {
+      strict: true
+    }
+  }
   
    
 })
