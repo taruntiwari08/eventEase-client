@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteEventbyAdmin, getEventById } from "../Services/EventServices/eventapi";
+import { deleteEventbyAdmin, getEventById } from "../services/eventservices/eventapi";
 import { Calendar, Clock, MapIcon, User2Icon } from "lucide-react";
 import { createOrder, verifyPayment } from "../Services/BookingServices/bookingapi";
 import { useSelector } from "react-redux";

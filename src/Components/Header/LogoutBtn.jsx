@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { logout } from '../../store/authslice'
-import { logoutUser } from '../../Services/authServices/authapi'
+import { logoutUser } from '../../services/authservices/authapi'
 import { LogOut } from 'lucide-react'
 
 export function LogoutBtn({onClick}) {

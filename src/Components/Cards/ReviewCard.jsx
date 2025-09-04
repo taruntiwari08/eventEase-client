@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Star, Edit, Trash2 } from "lucide-react";
-import { deleteReview, getEventReviews } from "../../Services/ReviewServices/reviewapi";
+import { deleteReview, getEventReviews } from "../../services/reviewservices/reviewapi";
 import ReviewForm from "./PostReview";
 
 function ReviewCard({ eventId }) {

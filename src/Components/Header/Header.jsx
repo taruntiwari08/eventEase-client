@@ -5,7 +5,7 @@ import {  Wallet } from "lucide-react";
 import { IconUser } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import { useSearch } from "../../Context/SearchContext";
-import { getAllEvents } from "../../Services/EventServices/eventapi";
+import { getAllEvents } from "../../services/eventservices/eventapi";
 import { Menu, X } from "lucide-react";
 
 export default function Header() {

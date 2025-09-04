@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { loginUser } from "../../Services/authServices/authapi";
+import { loginUser } from "../../services/authservices/authapi";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/authslice";
 import { useNavigate } from "react-router-dom";

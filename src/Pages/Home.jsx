@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FeaturesSection, HeroSectionOne } from '../Components/Hero'
 import { EventCard } from '../Components/Cards/EventCard';
-import { getAllEvents } from '../Services/EventServices/eventapi';
+import { getAllEvents } from '../services/eventservices/eventapi';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { useForm } from "react-hook-form";
-import { registerUser } from "../../Services/authServices/authapi";
+import { registerUser } from "../../services/authservices/authapi";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";

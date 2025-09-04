@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { getInTouch } from "../Services/ContactServices/contactApi";
+import { getInTouch } from "../services/contactservices/contactapi";
 import { Mail, User, MessageSquare, Upload, ImageIcon } from "lucide-react";
 import { IconSend } from "@tabler/icons-react";
 

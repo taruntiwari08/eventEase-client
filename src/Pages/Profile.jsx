@@ -3,8 +3,8 @@ import {
   getUserProfile,
   updateUserProfile,
   resetPassword,
-} from "../Services/authServices/authapi";
-import { cancelBooking, getMyBookings } from "../Services/BookingServices/bookingapi";
+} from "../services/authservices/authapi";
+import { cancelBooking, getMyBookings } from "../services/bookingservices/bookingapi";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { User, Mail, Wallet, Calendar, Lock, Pencil, X } from "lucide-react";

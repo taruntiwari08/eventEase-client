@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getEventAnalytics,  updateEvent, getMyEvents, cancelEvent } from "../Services/EventServices/eventapi";
+import { getEventAnalytics,  updateEvent, getMyEvents, cancelEvent } from "../services/eventservices/eventapi";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Calendar, Trash2, Edit, Users, Ticket, IndianRupee } from "lucide-react";

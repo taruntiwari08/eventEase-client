@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAllEvents, getAllEventsByAdmin } from '../Services/EventServices/eventapi';
+import { getAllEvents, getAllEventsByAdmin } from '../services/eventservices/eventapi';
 import { Link } from 'react-router-dom';
 import { EventCard } from '../Components/Cards/EventCard';
 import { useSelector } from 'react-redux';

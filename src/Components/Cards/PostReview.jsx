@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { postReview, updateReview } from "../../Services/ReviewServices/reviewapi";
+import { postReview, updateReview } from "../../services/reviewservices/reviewapi";
 import { toast, ToastContainer } from "react-toastify";
 
 const ReviewForm = ({ eventId, onSuccess, initialData = null }) => {
