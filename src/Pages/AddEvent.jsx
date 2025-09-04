@@ -157,7 +157,7 @@ return (
 
       {/* Image Upload */}
       <div>
-        <label className="block mb-1 font-medium">Event Image</label>
+        <label className="block mb-1 font-medium">Event Poster</label>
         <input
           type="file"
           {...register("image", { required: "Event image is required" })}

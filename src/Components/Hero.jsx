@@ -1,12 +1,15 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { use, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { cn } from "../lib/utils";
 import {IconAnalyzeFilled,IconHeart, IconRouteAltLeft} from "@tabler/icons-react";
 import {  CreditCard, Star, TicketIcon, Wallet, ChartArea } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export function HeroSectionOne() {
+  const user = useSelector((state) => state.auth.user);
+  console.log(user);
   return (
     <div className="relative mx-auto flex max-w-8xl flex-col items-center justify-center bg-gradient-to-r from-black via-blue-800 to-black">
       {/* Grid Lines (Decorations) */}
@@ -63,9 +66,10 @@ export function HeroSectionOne() {
             </button>
           </Link>
           <Link to="/signup">
-            <button className="w-full sm:w-48 md:w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
+            {  !user &&   <button className="w-full sm:w-48 md:w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
               Join Now
             </button>
+            }
           </Link>
         </motion.div>
       </div>

@@ -148,7 +148,7 @@ return (
           <div className="flex items-center gap-2">
             <Clock className="text-indigo-600" />
             <span>
-              {new Date(event?.date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).toUpperCase()}
+              {new Date(event?.date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC'  }).toUpperCase()}
             </span>
           </div>
           <a
@@ -193,7 +193,14 @@ return (
           
           {BookingAvailable ? (
             <button
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                if(!user){
+                  navigate("/login")
+                }
+                else {
+                  setOpen(true);
+                };
+              }}
               className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition duration-300"
             >
               Book Now
