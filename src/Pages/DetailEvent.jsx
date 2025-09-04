@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteEventbyAdmin, getEventById } from "../services/eventservices/eventapi";
 import { Calendar, Clock, MapIcon, User2Icon } from "lucide-react";
-import { createOrder, verifyPayment } from "../Services/BookingServices/bookingapi";
+import { createOrder, verifyPayment } from "../services/bookingservices/bookingapi";
 import { useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
