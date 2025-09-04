@@ -54,7 +54,14 @@ function DetailEvent() {
 try {
        const orderResponse = await createOrder(id,{seatsBooked:seats,usePoints});
        console.log("Order Response",orderResponse);
-       const options = {
+       if(orderResponse.message ==="Booking created successfully using wallet only" && orderResponse.statusCode===201 ){
+        navigate("/profile")
+        toast.success("Booking created successfully!");
+        return
+        
+       }
+       else{ 
+        const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
         amount: orderResponse.data.amount*100, 
         currency:orderResponse.data.currency,
@@ -90,6 +97,7 @@ try {
       const rzp = new window.Razorpay(options);
       rzp.open();
       setOpen(false);
+    }
       
 
 } catch (error) {

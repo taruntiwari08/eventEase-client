@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 export function HeroSectionOne() {
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
+ 
   return (
     <div className="relative mx-auto flex max-w-8xl flex-col items-center justify-center bg-gradient-to-r from-black via-blue-800 to-black">
       {/* Grid Lines (Decorations) */}
