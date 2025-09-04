@@ -37,7 +37,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="w-full bg-gradient-to-r from-black via-blue-800 to-black shadow-lg">
+    <div className="w-full p-6 bg-gradient-to-r from-black via-blue-800 to-black shadow-lg">
 
     
     <div className="max-w-lg mx-auto p-6 bg-transparent text-slate-200  to-blue-400 shadow-lg rounded-2xl border">
@@ -52,7 +52,7 @@ const ContactForm = () => {
           <label className="block text-sm font-medium text-slate-200">
             Name
           </label>
-          <div className="flex items-center border rounded-lg px-3 py-2">
+          <div className="flex mt-2 items-center border rounded-lg px-3 py-2">
             <User className="text-gray-400 w-5 h-5 mr-2" />
             <input
               type="text"
@@ -71,7 +71,7 @@ const ContactForm = () => {
           <label className="block text-sm font-medium text-slate-200">
             Email
           </label>
-          <div className="flex items-center border rounded-lg px-3 py-2">
+          <div className="flex  mt-2 items-center border rounded-lg px-3 py-2">
             <Mail className="text-gray-400 w-5 h-5 mr-2" />
             <input
               type="email"
@@ -93,7 +93,7 @@ const ContactForm = () => {
           <label className="block text-sm font-medium text-slate-200">
             Subject
           </label>
-          <div className="flex items-center border rounded-lg px-3 py-2">
+          <div className="flex  mt-2 items-center border rounded-lg px-3 py-2">
             <MessageSquare className="text-gray-400 w-5 h-5 mr-2" />
             <input
               type="text"
@@ -115,7 +115,7 @@ const ContactForm = () => {
           <textarea
             placeholder="Write your message..."
             {...register("message", { required: "Message is required" })}
-            className="w-full border rounded-lg px-3 py-2 outline-none resize-none h-24"
+            className="w-full border  mt-2 rounded-lg px-3 py-2 outline-none resize-none h-24"
           />
           {errors.message && (
             <p className="text-red-500 text-xs">{errors.message.message}</p>
@@ -124,10 +124,10 @@ const ContactForm = () => {
 
         {/* Optional Image Upload */}
         <div>
-          <label className="block text-sm font-medium text-slate-200 flex items-center gap-2">
+          <label className="text-sm font-medium text-slate-200 flex items-center gap-2">
             <ImageIcon className="w-5 h-5 text-gray-400" /> Upload Image (optional)
           </label>
-          <div className="flex items-center border rounded-lg px-3 py-2">
+          <div className="flex  mt-2 items-center border rounded-lg px-3 py-2">
             <Upload className="text-gray-400 w-5 h-5 mr-2" />
             <input
               type="file"

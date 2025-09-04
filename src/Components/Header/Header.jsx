@@ -57,7 +57,7 @@ export default function Header() {
     <header className="w-full bg-gradient-to-r from-black via-blue-800 to-black shadow-lg">
       <div className="max-w-7xl mx-auto px-6 py-4 flex lg:items-center lg:justify-between justify-evenly">
         {/* Logo */}
-        <Link to="/" className="text-white mt-2 lg:mt-0 lg:text-2xl text-xl font-bold tracking-wide">
+        <Link to="/" className="text-white mt-2 lg:mt-0 lg:text-2xl text-lg font-bold tracking-wide">
           Event<span className="text-yellow-300">Ease</span>
         </Link>
 

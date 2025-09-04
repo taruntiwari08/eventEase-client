@@ -22,7 +22,7 @@ const EventList = ( ) => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:py-6 lg:px-36 px-16  bg-gradient-to-r from-black via-blue-800 to-black">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-0 px-6 sm:px-6 md:px-12 lg:px-20 xl:px-28 py-6  bg-gradient-to-r from-black via-blue-800 to-black">
       {filteredEvents.map((event) => (
           <Link 
           key={event._id}

@@ -40,7 +40,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen ">
+    <div className="flex p-6 items-center justify-center min-h-screen ">
       <ToastContainer autoClose={3000} position="top-right"/>
       <div className="w-full max-w-md bg-transparent backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-gray-200 ">
         <h2 className="text-2xl font-bold text-center text-slate-300 mb-6">
