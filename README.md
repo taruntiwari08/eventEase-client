@@ -1,12 +1,40 @@
-# React + Vite
+# EventEase Frontend 🎉
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The frontend of **EventEase**, a modern event booking platform where users can discover events, search with filters, and book tickets with Razorpay integration and wallet cashback.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- 🔍 Search and filter events dynamically
+- 💳 Razorpay integration for secure payments
+- 💰 Wallet points system with cashback rewards
+- 📍 Google Maps link for event locations
+- 💬 Real-time Chat for event communities
+- 🖼️ Cloudinary-based image handling
+- 📱 Responsive design with TailwindCSS
+- ⚡ State management via Redux Toolkit
+- 🔐 Authentication & role-based access
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack
+- React.js
+- Tailwind CSS
+- Redux Toolkit
+- Axios
+- React Router DOM
 
-## Expanding the ESLint configuration
+## 📦 Installation
+```bash
+# Clone repo
+git clone <your-frontend-repo-url>
+cd frontend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+⚙️ Environment Variables
+
+Create a .env file:
+
+VITE_API_BASE_URL=http://localhost:5000
+VITE_RAZORPAY_KEY_ID=your_key_here
+
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
