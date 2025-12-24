@@ -6,6 +6,7 @@ import Footer from "./Components/Footer/Footer";
 import { getUserProfile } from "./services/authservices/authapi";
 import { logout, setCredentials } from "./store/authslice";
 import EventList from "./Components/Header/SearchEvents";
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,7 @@ function App() {
     <div className="min-h-screen flex flex-wrap content-between bg-gradieent-to r from-black via-blue-800 to-black">
       <div className="w-full">
         <Header/>
+        <ScrollToTop />
         <EventList />
         <main>
           <Outlet />
